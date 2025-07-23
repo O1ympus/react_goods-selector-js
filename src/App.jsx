@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 // import * as worker_threads from 'node:worker_threads';
 
 export const goods = [
@@ -17,7 +18,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
@@ -28,7 +29,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setGood('')}
+            onClick={() => setSelectedGood('')}
           />
         )}
       </h1>
@@ -37,9 +38,9 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
-              className={
-                selectedGood === good ? 'has-background-success-light' : ''
-              }
+              className={classNames({
+                'has-background-success-light': selectedGood === good,
+              })}
               key={good}
               data-cy="Good"
             >
@@ -49,7 +50,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setGood('')}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
@@ -58,7 +59,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setGood(good)}
+                    onClick={() => setSelectedGood(good)}
                   >
                     +
                   </button>
